@@ -45,6 +45,19 @@ export const authConfig = {
   ],
   adapter: PrismaAdapter(db),
   callbacks: {
+    signIn: async ({ user }) => {
+      const onlyUser = await db.user.findFirst();
+      if (!onlyUser) {
+        return false;
+      }
+
+      const isAllowedToSignIn = user.id === onlyUser.id;
+      if (isAllowedToSignIn) {
+        return true;
+      }
+
+      return false;
+    },
     session: ({ session, user }) => ({
       ...session,
       user: {

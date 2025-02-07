@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import VoronoiBackground from "./_components/VoronoiBackground";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -17,7 +18,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <VoronoiBackground />
+        <main className="relative flex min-h-screen items-center justify-center p-4">
+          <div className="w-full max-w-2xl rounded-lg bg-opacity-80 p-8 shadow-lg backdrop-blur-sm">
+            <TRPCReactProvider>{children}</TRPCReactProvider>
+          </div>
+        </main>
       </body>
     </html>
   );

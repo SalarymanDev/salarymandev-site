@@ -20,7 +20,9 @@ const VoronoiBackground: React.FC = () => {
   const pointsRef = useRef<Point[]>([]);
   const animationRef = useRef<number>();
   const cellSpeed = 0.01;
-  const numberOfCells = 100;
+  const numberOfCells = 2000;
+  const maxWidth = 6000;
+  const maxHeight = 6000;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -38,8 +40,8 @@ const VoronoiBackground: React.FC = () => {
       pointsRef.current = [];
       for (let i = 0; i < numberOfCells; i++) {
         pointsRef.current.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
+          x: Math.random() * maxWidth,
+          y: Math.random() * maxHeight,
           velocity: {
             x: (Math.random() - 0.5) * cellSpeed,
             y: (Math.random() - 0.5) * cellSpeed,
@@ -98,7 +100,7 @@ const VoronoiBackground: React.FC = () => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed inset-0 bg-gray-900" />;
+  return <canvas ref={canvasRef} className="fixed inset-0 z-0" />;
 };
 
 export default VoronoiBackground;

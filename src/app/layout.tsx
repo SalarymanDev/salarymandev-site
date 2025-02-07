@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import VoronoiBackground from "./_components/VoronoiBackground";
+import NavBar from "./_components/NavBar";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -17,13 +18,14 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body>
-        <VoronoiBackground />
-        <main className="relative flex min-h-screen items-center justify-center p-4">
-          <div className="w-full max-w-2xl rounded-lg bg-opacity-80 p-8 shadow-lg backdrop-blur-sm">
+      <body className="bg-gray-800">
+        <NavBar />
+        <main className="relative z-10 flex min-h-screen items-center justify-center">
+          <div className="rounded-lg bg-gray-900 bg-opacity-50 p-8 shadow-lg backdrop-blur-sm">
             <TRPCReactProvider>{children}</TRPCReactProvider>
           </div>
         </main>
+        <VoronoiBackground />
       </body>
     </html>
   );

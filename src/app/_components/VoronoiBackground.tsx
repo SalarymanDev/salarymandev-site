@@ -10,8 +10,7 @@ interface Vector {
 }
 
 interface Point {
-  x: number;
-  y: number;
+  point: Vector;
   velocity: Vector;
 }
 
@@ -20,9 +19,9 @@ const VoronoiBackground: React.FC = () => {
   const pointsRef = useRef<Point[]>([]);
   const animationRef = useRef<number>();
   const cellSpeed = 0.01;
-  const numberOfCells = 2000;
-  const maxWidth = 6000;
-  const maxHeight = 6000;
+  const numberOfCells = 500;
+  const maxWidth = 3840;
+  const maxHeight = 2160;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -40,8 +39,10 @@ const VoronoiBackground: React.FC = () => {
       pointsRef.current = [];
       for (let i = 0; i < numberOfCells; i++) {
         pointsRef.current.push({
-          x: Math.random() * maxWidth,
-          y: Math.random() * maxHeight,
+          point: {
+            x: Math.random() * maxWidth,
+            y: Math.random() * maxHeight,
+          },
           velocity: {
             x: (Math.random() - 0.5) * cellSpeed,
             y: (Math.random() - 0.5) * cellSpeed,
@@ -51,10 +52,12 @@ const VoronoiBackground: React.FC = () => {
     };
 
     const updatePoints = () => {
-      pointsRef.current = pointsRef.current.map((point) => ({
-        x: point.x + point.velocity.x,
-        y: point.y + point.velocity.y,
-        velocity: point.velocity,
+      pointsRef.current = pointsRef.current.map((cell) => ({
+        point: {
+          x: cell.point.x + cell.velocity.x,
+          y: cell.point.y + cell.velocity.y,
+        },
+        velocity: cell.velocity,
       }));
     };
 
@@ -63,7 +66,7 @@ const VoronoiBackground: React.FC = () => {
       const height = canvas.height;
 
       const interablePoints: Iterable<Delaunay.Point> = pointsRef.current.map(
-        (p) => [p.x, p.y],
+        (p) => [p.point.x, p.point.y],
       );
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       const delaunay = Delaunay.from(interablePoints);
@@ -71,7 +74,11 @@ const VoronoiBackground: React.FC = () => {
       const voronoi = delaunay.voronoi([0, 0, width, height]);
 
       ctx.clearRect(0, 0, width, height);
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
+      ctx.lineWidth = 4;
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      ctx.lineJoin = "miter";
 
       for (let i = 0; i < pointsRef.current.length; i++) {
         ctx.beginPath();

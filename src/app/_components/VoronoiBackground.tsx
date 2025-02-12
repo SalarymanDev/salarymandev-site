@@ -9,19 +9,17 @@ interface Vector {
   y: number;
 }
 
-interface Point {
+interface CellPoint {
   point: Vector;
   velocity: Vector;
 }
 
 const VoronoiBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const pointsRef = useRef<Point[]>([]);
+  const cellPointsRef = useRef<CellPoint[]>([]);
   const animationRef = useRef<number>();
-  const cellSpeed = 0.01;
-  const numberOfCells = 500;
-  const maxWidth = 3840;
-  const maxHeight = 2160;
+  const cellSpeed = 0.05;
+  const numberOfCells = 100;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -36,12 +34,12 @@ const VoronoiBackground: React.FC = () => {
     };
 
     const initializePoints = () => {
-      pointsRef.current = [];
+      cellPointsRef.current = [];
       for (let i = 0; i < numberOfCells; i++) {
-        pointsRef.current.push({
+        cellPointsRef.current.push({
           point: {
-            x: Math.random() * maxWidth,
-            y: Math.random() * maxHeight,
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
           },
           velocity: {
             x: (Math.random() - 0.5) * cellSpeed,
@@ -52,7 +50,7 @@ const VoronoiBackground: React.FC = () => {
     };
 
     const updatePoints = () => {
-      pointsRef.current = pointsRef.current.map((cell) => ({
+      cellPointsRef.current = cellPointsRef.current.map((cell) => ({
         point: {
           x: cell.point.x + cell.velocity.x,
           y: cell.point.y + cell.velocity.y,
@@ -65,9 +63,8 @@ const VoronoiBackground: React.FC = () => {
       const width = canvas.width;
       const height = canvas.height;
 
-      const interablePoints: Iterable<Delaunay.Point> = pointsRef.current.map(
-        (p) => [p.point.x, p.point.y],
-      );
+      const interablePoints: Iterable<Delaunay.Point> =
+        cellPointsRef.current.map((p) => [p.point.x, p.point.y]);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       const delaunay = Delaunay.from(interablePoints);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
@@ -75,12 +72,12 @@ const VoronoiBackground: React.FC = () => {
 
       ctx.clearRect(0, 0, width, height);
       ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
-      ctx.lineWidth = 4;
+      ctx.lineWidth = 2;
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
       ctx.lineJoin = "miter";
 
-      for (let i = 0; i < pointsRef.current.length; i++) {
+      for (let i = 0; i < cellPointsRef.current.length; i++) {
         ctx.beginPath();
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
         voronoi.renderCell(i, ctx);

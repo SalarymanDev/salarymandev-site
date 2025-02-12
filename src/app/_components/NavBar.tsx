@@ -47,14 +47,18 @@ export default function NavBar() {
                 />
               </DisclosureButton>
             </div>
-            <div className="flex shrink-0 items-center">
+            <div className="flex flex-row items-center justify-center">
               <Image
-                alt="Salaryman"
-                width={20}
-                height={20}
-                src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                className="h-8 w-auto"
-              />
+                alt="Profile Picture"
+                width={40}
+                height={40}
+                src="/profile.png"
+                className="mr-2 h-10 w-auto"
+              ></Image>
+              <div className="items-begin flex shrink-0 flex-col justify-center">
+                <h1 className="text-md font-bold text-white">Robert Kennedy</h1>
+                <h5 className="text-xs font-bold text-white">SalarymanDev</h5>
+              </div>
             </div>
             <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
               {navigation.map((item) => (

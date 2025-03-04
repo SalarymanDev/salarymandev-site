@@ -1,4 +1,4 @@
-import { HydrateClient } from "~/trpc/server";
+// import { HydrateClient } from "~/trpc/server";
 
 export default async function Home() {
   // const hello = await api.post.hello({ text: "from tRPC" });
@@ -9,14 +9,14 @@ export default async function Home() {
   // }
 
   return (
-    <HydrateClient>
-      <main className="flex flex-col items-center justify-center text-white">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Salaryman <span className="text-[hsl(280,100%,70%)]">Dev</span>
-          </h1>
-          <h5>Yes, I used T3 stack. Hello Theo &#128075;</h5>
-          {/* <div className="flex flex-col items-center gap-2">
+    // <HydrateClient>
+    <main className="flex flex-col items-center justify-center text-white">
+      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
+        <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
+          Salaryman <span className="text-[hsl(280,100%,70%)]">Dev</span>
+        </h1>
+        <h5>Yes, I used T3 stack. Hello Theo &#128075;</h5>
+        {/* <div className="flex flex-col items-center gap-2">
             <p className="text-2xl text-white">
               {hello ? hello.greeting : "Loading tRPC query..."}
             </p>
@@ -35,8 +35,8 @@ export default async function Home() {
           </div>
 
           {session?.user && <LatestPost />} */}
-        </div>
-      </main>
-    </HydrateClient>
+      </div>
+    </main>
+    // </HydrateClient>
   );
 }

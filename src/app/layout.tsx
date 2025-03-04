@@ -20,8 +20,8 @@ export default function RootLayout({
     <html lang="en" className={`${GeistSans.variable}`}>
       <body className="bg-gray-800">
         <NavBar />
-        <main className="relative z-10 flex min-h-screen items-center justify-center">
-          <div className="rounded-lg bg-gray-900 bg-opacity-50 p-8 shadow-lg backdrop-blur-sm">
+        <main className="relative z-10 flex min-h-screen w-auto items-center justify-center">
+          <div className="w-auto rounded-lg bg-gray-900 bg-opacity-50 p-8 shadow-lg backdrop-blur-sm">
             <TRPCReactProvider>{children}</TRPCReactProvider>
           </div>
         </main>

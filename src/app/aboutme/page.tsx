@@ -20,9 +20,14 @@ export default async function AboutMe() {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-6 p-2">
-          <p className="col-span-2">
+          <p className="col-span-2 text-center">
             {
-              "Yo, I'm Robert an ex-Amazon software engineer from the United States currently living in Tokyo, Japan."
+              "Hello! I'm Robert an ex-Amazon software engineer and amateur game developer."
+            }
+          </p>
+          <p className="col-span-2 text-center">
+            {
+              "I'm originally from the United States but moved to Japan to study Japanese. I'm now based out of Tokyo."
             }
           </p>
           <div className="flex flex-col items-center justify-center">

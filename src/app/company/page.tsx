@@ -5,8 +5,10 @@ export default async function Company() {
         <h1 className="col-span-2 text-center text-3xl font-bold">
           Salaryman LLC
         </h1>
-        <p className="col-span-2 pt-4">
+        <p className="col-span-2 pt-4 text-center">
           This is my company! I created it to publish software and video games.
+        </p>
+        <p className="col-span-2 text-center">
           However, I am also open to contract opportunities if you are looking
           for an experienced software engineer or maybe an amateur game
           developer.

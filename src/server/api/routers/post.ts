@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import {
@@ -7,35 +8,61 @@ import {
 } from "~/server/api/trpc";
 
 export const postRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
-
-  create: protectedProcedure
-    .input(z.object({ name: z.string().min(1) }))
+  put: protectedProcedure
+    .input(
+      z.object({
+        id: z.number().optional(),
+        title: z.string(),
+        body: z.string(),
+      }),
+    )
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.post.create({
+      if (input.id) {
+        const existingPost = await ctx.db.blogPost.findUnique({
+          where: { id: input.id },
+        });
+
+        if (!existingPost) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: `Not blog post with id ${input.id} was found.`,
+          });
+        }
+
+        const updatedPost = await ctx.db.blogPost.update({
+          where: { id: input.id },
+          data: {
+            title: input.title,
+            body: input.body,
+          },
+        });
+
+        return updatedPost;
+      }
+
+      const post = ctx.db.blogPost.create({
         data: {
-          name: input.name,
+          title: input.title,
+          body: input.body,
           createdBy: { connect: { id: ctx.session.user.id } },
         },
       });
+
+      return post;
+    }),
+
+  get: publicProcedure
+    .input(z.object({ id: z.number() }))
+    .query(async ({ ctx, input }) => {
+      return await ctx.db.blogPost.findUnique({ where: { id: input.id } });
     }),
 
   getLatest: protectedProcedure.query(async ({ ctx }) => {
-    const post = await ctx.db.post.findFirst({
+    const post = await ctx.db.blogPost.findFirst({
       orderBy: { createdAt: "desc" },
       where: { createdBy: { id: ctx.session.user.id } },
     });
 
     return post ?? null;
-  }),
-
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!";
   }),
 });

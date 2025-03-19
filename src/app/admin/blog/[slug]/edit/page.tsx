@@ -1,5 +1,3 @@
-import BlogPostEditor from "~/app/_components/BlogPostEditor";
-
 export default async function AdminBlogPostEditPage({
   params,
 }: {
@@ -7,5 +5,5 @@ export default async function AdminBlogPostEditPage({
 }) {
   const { slug } = await params;
 
-  return <BlogPostEditor />;
+  return <></>;
 }

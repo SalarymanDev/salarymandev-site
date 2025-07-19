@@ -41,9 +41,9 @@ export default async function Projects() {
           <div className="flex flex-col p-4">
             <h1 className="text-2xl font-bold">TASTE</h1>
             <p>
-              The Anime Soundtrack Testing Establishment (TASTE) is database for
-              my friends and I to track and rate anime opening/outro music to
-              determine if they are certified bangers, or not. This includes
+              The Anime Soundtrack Testing Establishment (TASTE) is database a
+              for my friends and I to track and rate anime opening/outro music
+              to determine if they are certified bangers, or not. This includes
               TASTE board members being able to vote yea or nay on each song.
             </p>
             <p className="pt-4">

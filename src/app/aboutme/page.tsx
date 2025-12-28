@@ -16,7 +16,7 @@ export default async function AboutMe() {
           <div className="items-begin flex shrink-0 flex-col justify-center">
             <h1 className="text-3xl font-bold">Robert Kennedy</h1>
             <h2 className="text-xl font-bold">SalarymanDev</h2>
-            <h3 className="text-md font-bold">Founder of Salaryman, LLC</h3>
+            <h3 className="text-md font-bold">Founder of Salaryman Inc.</h3>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-6 p-2">
@@ -32,7 +32,7 @@ export default async function AboutMe() {
           </p>
           <div className="flex flex-col items-center justify-center">
             <h3 className="text-lg font-bold">Experience</h3>
-            <p>Founder of Salaryman, LLC</p>
+            <p>Founder of Salaryman Inc.</p>
             <p>5 Years at Amazon</p>
             <p>2 Years at ImageSoft</p>
             <p>1 Year of Contract Work</p>

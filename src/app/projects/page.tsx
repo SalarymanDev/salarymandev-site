@@ -27,7 +27,7 @@ export default async function Projects() {
             <p className="pt-4">Created using Godot 4.4</p>
           </div>
 
-          <div className="flex flex-col p-4">
+          {/*<div className="flex flex-col p-4">
             <h1 className="text-2xl font-bold">Salaryman AI Coder</h1>
             <p>
               This is a GitHub Application that will automatically write code
@@ -49,7 +49,7 @@ export default async function Projects() {
             <p className="pt-4">
               Created using NextJS, Vercel, and Postgresql.
             </p>
-          </div>
+          </div>*/}
         </div>
       </div>
     </main>
